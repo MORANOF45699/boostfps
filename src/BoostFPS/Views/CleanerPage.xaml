@@ -1,0 +1,78 @@
+<Page x:Class="BoostFPS.Views.CleanerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource Bg}" Title="RAM Cleaner">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="28,24,28,24">
+
+            <TextBlock Text="RAM Cleaner" Style="{StaticResource H1}" />
+            <TextBlock Style="{StaticResource Subtle}"
+                       Text="ล้าง standby list, working set, temp folder เพื่อคืน RAM ให้เกม ทำได้บ่อยแค่ไหนก็ได้ ไม่ต้องรีบูต" />
+
+            <Border Style="{StaticResource Card}" Margin="0,16,0,10">
+                <StackPanel>
+                    <TextBlock Text="สถานะ RAM ตอนนี้" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{StaticResource Info}" Margin="0,0,0,10" />
+                    <TextBlock x:Name="StatsText" FontSize="13" />
+                    <ProgressBar x:Name="UsageBar" Height="10" Margin="0,10,0,0"
+                                 Background="{StaticResource Bg}" Foreground="{StaticResource Accent}"
+                                 Maximum="100" />
+                </StackPanel>
+            </Border>
+
+            <UniformGrid Columns="2" Margin="0,0,0,10">
+                <Border Style="{StaticResource Card}" Margin="0,0,5,10">
+                    <StackPanel>
+                        <TextBlock Text="Standby list" FontWeight="SemiBold" />
+                        <TextBlock Style="{StaticResource Subtle}" TextWrapping="Wrap" Margin="0,4,0,0"
+                                   Text="RAM ที่ Windows เก็บ cache ไว้ใช้ต่อ ล้างทิ้งก่อนเปิดเกมใหญ่จะได้ RAM ว่างเต็ม" />
+                        <Button Content="ล้าง standby list" Click="Standby_Click" Margin="0,10,0,0" HorizontalAlignment="Left" />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource Card}" Margin="5,0,0,10">
+                    <StackPanel>
+                        <TextBlock Text="Working set ทุก process" FontWeight="SemiBold" />
+                        <TextBlock Style="{StaticResource Subtle}" TextWrapping="Wrap" Margin="0,4,0,0"
+                                   Text="บีบ RAM ที่แต่ละโปรแกรมจองไว้ให้ลง paging ที่ไม่ใช้จะถูก swap ออก" />
+                        <Button Content="Empty working sets" Click="WorkingSet_Click" Margin="0,10,0,0" HorizontalAlignment="Left" />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource Card}" Margin="0,0,5,10">
+                    <StackPanel>
+                        <TextBlock Text="Modified list" FontWeight="SemiBold" />
+                        <TextBlock Style="{StaticResource Subtle}" TextWrapping="Wrap" Margin="0,4,0,0"
+                                   Text="Flush หน้าเมมเมอรี่ที่ถูกแก้แต่ยังไม่ commit ลงดิสก์" />
+                        <Button Content="Flush modified list" Click="Modified_Click" Margin="0,10,0,0" HorizontalAlignment="Left" />
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource Card}" Margin="5,0,0,10">
+                    <StackPanel>
+                        <TextBlock Text="Temp folder" FontWeight="SemiBold" />
+                        <TextBlock Style="{StaticResource Subtle}" TextWrapping="Wrap" Margin="0,4,0,0"
+                                   Text="ล้าง %TEMP%, C:\Windows\Temp, Prefetch ข้ามไฟล์ที่ถูกใช้อยู่" />
+                        <Button Content="ล้าง temp" Click="Temp_Click" Margin="0,10,0,0" HorizontalAlignment="Left" />
+                    </StackPanel>
+                </Border>
+            </UniformGrid>
+
+            <Button Style="{StaticResource PrimaryButton}" Content="เคลียร์หมดทุกอย่าง"
+                    HorizontalAlignment="Left" Click="All_Click" Margin="0,4,0,10" />
+
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="ผลลัพธ์" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{StaticResource Info}" Margin="0,0,0,8" />
+                    <TextBox x:Name="OutputBox" IsReadOnly="True" TextWrapping="NoWrap"
+                             Background="{StaticResource Bg}" Foreground="{StaticResource Text}"
+                             BorderBrush="{StaticResource Border}" FontFamily="Consolas" FontSize="12"
+                             Height="180" VerticalScrollBarVisibility="Auto" />
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

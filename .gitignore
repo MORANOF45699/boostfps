@@ -1,0 +1,26 @@
+# Build output
+bin/
+obj/
+publish/
+*.user
+*.suo
+
+# Rider/VS
+.idea/
+.vs/
+
+# Local settings and machine backups
+appsettings.Local.json
+*.pdb
+
+# Runtime data written by the app to ProgramData; never committed
+Backups/
+changelog.json
+
+# OS
+Thumbs.db
+Desktop.ini
+
+# NuGet
+*.nupkg
+packages/

@@ -1,0 +1,722 @@
+[
+  {
+    "Id": "input.mouse-accel-off",
+    "Category": "Input",
+    "Name": "ปิด Mouse Acceleration (Raw 1:1)",
+    "Description": "ปิด Enhance pointer precision และตั้งเส้นโค้ง SmoothMouseX/YCurve เป็นเส้นตรง ทำให้เมาส์เป็น 1:1 ไม่มีเร่งความเร็ว",
+    "RegPath": "HKCU\\Control Panel\\Mouse",
+    "Risk": "Safe",
+    "Tiers": ["Safe", "Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "MouseSensitivity", "Kind": "String", "OnValue": "10", "DefaultValue": "10" },
+      { "ValueName": "MouseSpeed", "Kind": "String", "OnValue": "0", "DefaultValue": "1" },
+      { "ValueName": "MouseThreshold1", "Kind": "String", "OnValue": "0", "DefaultValue": "6" },
+      { "ValueName": "MouseThreshold2", "Kind": "String", "OnValue": "0", "DefaultValue": "10" },
+      { "ValueName": "SmoothMouseXCurve", "Kind": "Binary", "OnValue": "0000000000000000C0CC0C0000000000809919000000000040662600000000000033330000000000" },
+      { "ValueName": "SmoothMouseYCurve", "Kind": "Binary", "OnValue": "0000000000000000000038000000000000007000000000000000A800000000000000E00000000000" }
+    ]
+  },
+  {
+    "Id": "input.default-user-mouse",
+    "Category": "Input",
+    "Name": "ปิด Mouse Acceleration ของ user ที่สร้างใหม่",
+    "Description": "ตั้งค่าเดียวกันใน HKU\\.DEFAULT เพื่อให้ account ที่สร้างทีหลังได้ค่าเดิม",
+    "RegPath": "HKU\\.DEFAULT\\Control Panel\\Mouse",
+    "Risk": "Safe",
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "MouseSpeed", "Kind": "String", "OnValue": "0", "DefaultValue": "1" },
+      { "ValueName": "MouseThreshold1", "Kind": "String", "OnValue": "0", "DefaultValue": "6" },
+      { "ValueName": "MouseThreshold2", "Kind": "String", "OnValue": "0", "DefaultValue": "10" }
+    ]
+  },
+  {
+    "Id": "input.keyboard-response",
+    "Category": "Input",
+    "Name": "Keyboard filter response เร็วสุด",
+    "Description": "ลด AutoRepeatDelay / BounceTime / DelayBeforeAcceptance ของ Filter Keys ให้คีย์บอร์ดตอบสนองทันที",
+    "RegPath": "HKCU\\Control Panel\\Accessibility\\Keyboard Response",
+    "Risk": "Safe",
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "AutoRepeatDelay", "Kind": "String", "OnValue": "200", "DefaultValue": "1000" },
+      { "ValueName": "AutoRepeatRate", "Kind": "String", "OnValue": "6", "DefaultValue": "500" },
+      { "ValueName": "BounceTime", "Kind": "String", "OnValue": "0", "DefaultValue": "0" },
+      { "ValueName": "DelayBeforeAcceptance", "Kind": "String", "OnValue": "0", "DefaultValue": "0" },
+      { "ValueName": "Flags", "Kind": "String", "OnValue": "27", "DefaultValue": "126" }
+    ]
+  },
+  {
+    "Id": "input.keyboard-speed",
+    "Category": "Input",
+    "Name": "Keyboard repeat เร็วสุด",
+    "Description": "KeyboardDelay=0 และ KeyboardSpeed=31 (ค่าสูงสุดที่ Windows รับ)",
+    "RegPath": "HKCU\\Control Panel\\Keyboard",
+    "Risk": "Safe",
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "KeyboardDelay", "Kind": "String", "OnValue": "0", "DefaultValue": "1" },
+      { "ValueName": "KeyboardSpeed", "Kind": "String", "OnValue": "31", "DefaultValue": "31" }
+    ]
+  },
+  {
+    "Id": "input.mouse-queue-size",
+    "Category": "Input",
+    "Name": "Mouse data queue size = 20",
+    "Description": "ลด MouseDataQueueSize จาก 100 เหลือ 20 ลด buffer ของ mouclass ทำให้ input ถึงเกมเร็วขึ้น",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\mouclass\\Parameters",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "MouseDataQueueSize", "Kind": "DWord", "OnValue": 20, "DefaultValue": 100 }
+    ]
+  },
+  {
+    "Id": "input.keyboard-queue-size",
+    "Category": "Input",
+    "Name": "Keyboard data queue size = 20",
+    "Description": "ลด KeyboardDataQueueSize จาก 100 เหลือ 20 ลด buffer ของ kbdclass",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\kbdclass\\Parameters",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "KeyboardDataQueueSize", "Kind": "DWord", "OnValue": 20, "DefaultValue": 100 }
+    ]
+  },
+  {
+    "Id": "input.joystick-latency",
+    "Category": "Input",
+    "Name": "Joystick latency buffer ต่ำสุด",
+    "Description": "LatencyBuffer=1 สำหรับ Winmm joystick (จอย/พวงมาลัย)",
+    "RegPath": "HKCU\\System\\CurrentControlSet\\Control\\MediaProperties\\PrivateProperties\\Joystick\\Winmm",
+    "Risk": "Safe",
+    "Tiers": ["Extreme"],
+    "Values": [
+      { "ValueName": "LatencyBuffer", "Kind": "DWord", "OnValue": 1 }
+    ]
+  },
+  {
+    "Id": "input.doubleclick-timer-off",
+    "Category": "Input",
+    "Name": "ปิด Explorer double-click timer",
+    "Description": "UseDoubleClickTimer=0 ลด delay ของ shell ตอนตรวจจับดับเบิลคลิก",
+    "RegPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+    "Risk": "Safe",
+    "Tiers": ["Extreme"],
+    "Values": [
+      { "ValueName": "UseDoubleClickTimer", "Kind": "DWord", "OnValue": 0, "DefaultValue": 1 }
+    ]
+  },
+  {
+    "Id": "desktop.responsiveness",
+    "Category": "Desktop",
+    "Name": "Desktop responsiveness",
+    "Description": "ลด MenuShowDelay, HungAppTimeout, WaitToKillAppTimeout และปิด window ghosting ให้ shell ตอบสนองไว",
+    "RegPath": "HKCU\\Control Panel\\Desktop",
+    "Risk": "Moderate",
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "AutoEndTasks", "Kind": "String", "OnValue": "1", "DefaultValue": "0" },
+      { "ValueName": "DisableProcessWindowsGhosting", "Kind": "String", "OnValue": "1", "DefaultValue": "0" },
+      { "ValueName": "ForegroundAutoRefresh", "Kind": "String", "OnValue": "1" },
+      { "ValueName": "HungAppTimeout", "Kind": "String", "OnValue": "1000", "DefaultValue": "5000" },
+      { "ValueName": "LowLevelHooksTimeout", "Kind": "String", "OnValue": "1000", "DefaultValue": "5000" },
+      { "ValueName": "MaxWaitForInputIdle", "Kind": "String", "OnValue": "1" },
+      { "ValueName": "MenuShowDelay", "Kind": "String", "OnValue": "0", "DefaultValue": "400" },
+      { "ValueName": "WaitToKillAppTimeout", "Kind": "String", "OnValue": "2000", "DefaultValue": "5000" },
+      { "ValueName": "UserPreferencesMask", "Kind": "Binary", "OnValue": "9012038010000000" }
+    ]
+  },
+  {
+    "Id": "desktop.startup-delay-off",
+    "Category": "Desktop",
+    "Name": "ปิด startup delay ของ Explorer",
+    "Description": "StartupDelayInMSec=0 ทำให้โปรแกรม startup เริ่มทันทีแทนรอราว 10 วินาที",
+    "RegPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize",
+    "Risk": "Safe",
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "StartupDelayInMSec", "Kind": "DWord", "OnValue": 0 }
+    ]
+  },
+  {
+    "Id": "gamedvr.gameconfigstore",
+    "Category": "Game DVR",
+    "Name": "ปิด Game DVR (GameConfigStore)",
+    "Description": "ปิดการอัดวิดีโอเบื้องหลังและเปิด Fullscreen Exclusive ตรง ๆ ลด present latency",
+    "RegPath": "HKCU\\System\\GameConfigStore",
+    "Risk": "Safe",
+    "Tiers": ["Safe", "Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "GameDVR_Enabled", "Kind": "DWord", "OnValue": 0, "DefaultValue": 1 },
+      { "ValueName": "GameDVR_FSEBehaviorMode", "Kind": "DWord", "OnValue": 2, "DefaultValue": 0 },
+      { "ValueName": "GameDVR_HonorUserFSEBehaviorMode", "Kind": "DWord", "OnValue": 1, "DefaultValue": 0 },
+      { "ValueName": "GameDVR_DXGIHonorFSEWindowsCompatible", "Kind": "DWord", "OnValue": 1, "DefaultValue": 0 },
+      { "ValueName": "GameDVR_EFSEFeatureFlags", "Kind": "DWord", "OnValue": 0 }
+    ]
+  },
+  {
+    "Id": "gamedvr.appcapture-off",
+    "Category": "Game DVR",
+    "Name": "ปิด App Capture",
+    "Description": "AppCaptureEnabled=0 ปิดการอัดหน้าจอของ Game Bar",
+    "RegPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\GameDVR",
+    "Risk": "Safe",
+    "Tiers": ["Safe", "Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "AppCaptureEnabled", "Kind": "DWord", "OnValue": 0, "DefaultValue": 1 }
+    ]
+  },
+  {
+    "Id": "gamedvr.policy-off",
+    "Category": "Game DVR",
+    "Name": "ปิด Game DVR ระดับ policy",
+    "Description": "AllowGameDVR=0 บังคับปิดทั้งเครื่อง ไม่ให้เปิดกลับจาก Settings",
+    "RegPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR",
+    "Risk": "Safe",
+    "Tiers": ["Safe", "Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "AllowGameDVR", "Kind": "DWord", "OnValue": 0 }
+    ]
+  },
+  {
+    "Id": "gamebar.tune",
+    "Category": "Game DVR",
+    "Name": "เปิด Game Mode ปิด Game Bar popup",
+    "Description": "เปิด Auto Game Mode แต่ปิด startup panel และ Nexus overlay",
+    "RegPath": "HKCU\\Software\\Microsoft\\GameBar",
+    "Risk": "Safe",
+    "Tiers": ["Safe", "Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "AllowAutoGameMode", "Kind": "DWord", "OnValue": 1 },
+      { "ValueName": "AutoGameModeEnabled", "Kind": "DWord", "OnValue": 1 },
+      { "ValueName": "ShowStartupPanel", "Kind": "DWord", "OnValue": 0, "DefaultValue": 1 },
+      { "ValueName": "UseNexusForGameBarEnabled", "Kind": "DWord", "OnValue": 0, "DefaultValue": 1 }
+    ]
+  },
+  {
+    "Id": "mmcss.system-profile",
+    "Category": "Scheduler",
+    "Name": "MMCSS ยกทรัพยากรให้เกม",
+    "Description": "SystemResponsiveness=0 ไม่กันโควตาให้ background, ปิด network throttling, GPURenderAheadLimit=0 ลด pre-render",
+    "RegPath": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "SystemResponsiveness", "Kind": "DWord", "OnValue": 0, "DefaultValue": 20 },
+      { "ValueName": "NetworkThrottlingIndex", "Kind": "DWord", "OnValue": 4294967295, "DefaultValue": 10 },
+      { "ValueName": "NoLazyMode", "Kind": "DWord", "OnValue": 1 },
+      { "ValueName": "GPURenderAheadLimit", "Kind": "DWord", "OnValue": 0 }
+    ]
+  },
+  {
+    "Id": "mmcss.games-task",
+    "Category": "Scheduler",
+    "Name": "MMCSS Games task priority",
+    "Description": "ตั้ง task profile ของเกม GPU Priority 8, Priority 6, Scheduling Category High, Latency Sensitive True",
+    "RegPath": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "Affinity", "Kind": "DWord", "OnValue": 0, "DefaultValue": 0 },
+      { "ValueName": "Background Only", "Kind": "String", "OnValue": "False", "DefaultValue": "False" },
+      { "ValueName": "Clock Rate", "Kind": "DWord", "OnValue": 10000, "DefaultValue": 10000 },
+      { "ValueName": "GPU Priority", "Kind": "DWord", "OnValue": 8, "DefaultValue": 8 },
+      { "ValueName": "Priority", "Kind": "DWord", "OnValue": 6, "DefaultValue": 2 },
+      { "ValueName": "Latency Sensitive", "Kind": "String", "OnValue": "True", "DefaultValue": "True" },
+      { "ValueName": "SFIO Priority", "Kind": "String", "OnValue": "High", "DefaultValue": "Normal" },
+      { "ValueName": "Scheduling Category", "Kind": "String", "OnValue": "High", "DefaultValue": "Medium" }
+    ]
+  },
+  {
+    "Id": "scheduler.priority-separation",
+    "Category": "Scheduler",
+    "Name": "Win32PrioritySeparation = 42 (0x2A)",
+    "Description": "Quantum สั้นและ boost ให้ foreground แรงสุด เหมาะกับเกม fullscreen",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "Win32PrioritySeparation", "Kind": "DWord", "OnValue": 42, "DefaultValue": 2 },
+      { "ValueName": "IRQ8Priority", "Kind": "DWord", "OnValue": 1 }
+    ]
+  },
+  {
+    "Id": "scheduler.convertible-slate-off",
+    "Category": "Scheduler",
+    "Name": "ConvertibleSlateMode = 0 (เฉพาะ desktop)",
+    "Description": "บอก Windows ว่าเครื่องไม่ใช่ tablet กัน touch keyboard เด้ง ซ่อนอัตโนมัติบนโน้ตบุ๊ก 2-in-1",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl",
+    "Risk": "Safe",
+    "Tiers": ["Extreme"],
+    "Requires": { "Laptop": false },
+    "Values": [
+      { "ValueName": "ConvertibleSlateMode", "Kind": "DWord", "OnValue": 0 }
+    ]
+  },
+  {
+    "Id": "kernel.dpc-latency",
+    "Category": "Scheduler",
+    "Name": "Kernel DPC และ timer latency",
+    "Description": "ลด DPC queue depth, กระจาย timer, เปิด threaded DPC และ GlobalTimerResolutionRequests — ปิด DPC watchdog ด้วยจึงจัดเป็นระดับ Aggressive",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+    "Risk": "Aggressive",
+    "RequiresReboot": true,
+    "Tiers": ["Extreme"],
+    "Values": [
+      { "ValueName": "AdjustDpcThreshold", "Kind": "DWord", "OnValue": 0 },
+      { "ValueName": "DistributeTimers", "Kind": "DWord", "OnValue": 1 },
+      { "ValueName": "DpcQueueDepth", "Kind": "DWord", "OnValue": 1 },
+      { "ValueName": "DpcTimeout", "Kind": "DWord", "OnValue": 0 },
+      { "ValueName": "DpcWatchdogPeriod", "Kind": "DWord", "OnValue": 0 },
+      { "ValueName": "DpcWatchdogProfileOffset", "Kind": "DWord", "OnValue": 0 },
+      { "ValueName": "GlobalTimerResolutionRequests", "Kind": "DWord", "OnValue": 1 },
+      { "ValueName": "IdealDpcRate", "Kind": "DWord", "OnValue": 0 },
+      { "ValueName": "MaximumDpcQueueDepth", "Kind": "DWord", "OnValue": 0 },
+      { "ValueName": "MinimumDpcRate", "Kind": "DWord", "OnValue": 0 },
+      { "ValueName": "SplitLargeCaches", "Kind": "DWord", "OnValue": 0 },
+      { "ValueName": "ThreadDpcEnable", "Kind": "DWord", "OnValue": 1 }
+    ]
+  },
+  {
+    "Id": "kernel.alpc-wake",
+    "Category": "Scheduler",
+    "Name": "ALPC wake policy",
+    "Description": "AlpcWakePolicy=1 ปลุก thread ที่รอ ALPC เร็วขึ้น",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Extreme"],
+    "Values": [
+      { "ValueName": "AlpcWakePolicy", "Kind": "DWord", "OnValue": 1 }
+    ]
+  },
+  {
+    "Id": "system.errormode",
+    "Category": "System",
+    "Name": "ปิด error dialog ของระบบ",
+    "Description": "ErrorMode=2 ไม่ให้ Windows เด้งกล่อง hard error ตอนเล่นเกม",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Windows",
+    "Risk": "Moderate",
+    "Tiers": ["Extreme"],
+    "Values": [
+      { "ValueName": "ErrorMode", "Kind": "DWord", "OnValue": 2, "DefaultValue": 0 }
+    ]
+  },
+  {
+    "Id": "memory.paging",
+    "Category": "Memory",
+    "Name": "Kernel อยู่ใน RAM ไม่ลง paging file",
+    "Description": "DisablePagingExecutive=1 กัน kernel และ driver ถูก page ออก ลด stutter แลกกับใช้ RAM เพิ่ม",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "DisablePagingExecutive", "Kind": "DWord", "OnValue": 1, "DefaultValue": 0 },
+      { "ValueName": "LargeSystemCache", "Kind": "DWord", "OnValue": 0, "DefaultValue": 0 },
+      { "ValueName": "ClearPageFileAtShutdown", "Kind": "DWord", "OnValue": 0, "DefaultValue": 0 },
+      { "ValueName": "IoPageLockLimit", "Kind": "DWord", "OnValue": 0 },
+      { "ValueName": "LargePageMinimum", "Kind": "DWord", "OnValue": 0 }
+    ]
+  },
+  {
+    "Id": "memory.prefetch-off",
+    "Category": "Memory",
+    "Name": "ปิด Prefetch และ Superfetch (SSD เท่านั้น)",
+    "Description": "บน SSD การ prefetch ไม่ช่วยแต่กิน I/O ซ่อนอัตโนมัติถ้าไดรฟ์ระบบเป็น HDD",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PrefetchParameters",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Balanced", "Extreme"],
+    "Requires": { "SystemDriveIsSsd": true },
+    "Values": [
+      { "ValueName": "EnablePrefetcher", "Kind": "DWord", "OnValue": 0, "DefaultValue": 3 },
+      { "ValueName": "EnableSuperfetch", "Kind": "DWord", "OnValue": 0, "DefaultValue": 3 },
+      { "ValueName": "EnableBoottrace", "Kind": "DWord", "OnValue": 0 }
+    ]
+  },
+  {
+    "Id": "gpu.hags-tdr",
+    "Category": "GPU",
+    "Name": "HAGS และ TDR delay 60 วินาที",
+    "Description": "HwSchMode=2 เปิด Hardware GPU Scheduling และยืด TDR timeout กัน driver reset ตอน GPU โหลดหนัก",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "HwSchMode", "Kind": "DWord", "OnValue": 2, "DefaultValue": 1 },
+      { "ValueName": "TdrDelay", "Kind": "DWord", "OnValue": 60, "DefaultValue": 2 },
+      { "ValueName": "TdrDdiDelay", "Kind": "DWord", "OnValue": 60, "DefaultValue": 5 }
+    ]
+  },
+  {
+    "Id": "gpu.power-throttling-off",
+    "Category": "GPU",
+    "Name": "ปิด Power Throttling (เฉพาะ desktop)",
+    "Description": "PowerThrottlingOff=1 ไม่ให้ Windows ลดคล็อกโปรเซสเบื้องหลัง ซ่อนบนโน้ตบุ๊กเพราะกินแบตหนัก",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+    "Risk": "Aggressive",
+    "RequiresReboot": true,
+    "Tiers": ["Extreme"],
+    "Requires": { "Laptop": false },
+    "Values": [
+      { "ValueName": "PowerThrottlingOff", "Kind": "DWord", "OnValue": 1, "DefaultValue": 0 }
+    ]
+  },
+  {
+    "Id": "gpu.directx-flip",
+    "Category": "GPU",
+    "Name": "DirectX ForceFlipInterval = 0",
+    "Description": "ลด present latency ของ DXGI flip model",
+    "RegPath": "HKLM\\SOFTWARE\\Microsoft\\DirectX",
+    "Risk": "Moderate",
+    "Tiers": ["Extreme"],
+    "Values": [
+      { "ValueName": "ForceFlipInterval", "Kind": "DWord", "OnValue": 0 }
+    ]
+  },
+  {
+    "Id": "net.tcpip-params",
+    "Category": "Network",
+    "Name": "TCP/IP stack low latency",
+    "Description": "TCPNoDelay และ TcpAckFrequency=1 ปิด Nagle กับ delayed ACK พร้อมขยาย MaxUserPort และลด TcpTimedWaitDelay",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip\\Parameters",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "TCPNoDelay", "Kind": "DWord", "OnValue": 1 },
+      { "ValueName": "TcpAckFrequency", "Kind": "DWord", "OnValue": 1 },
+      { "ValueName": "TcpDelAckTicks", "Kind": "DWord", "OnValue": 0 },
+      { "ValueName": "Tcp1323Opts", "Kind": "DWord", "OnValue": 1 },
+      { "ValueName": "SackOpts", "Kind": "DWord", "OnValue": 1 },
+      { "ValueName": "DefaultTTL", "Kind": "DWord", "OnValue": 64 },
+      { "ValueName": "EnablePMTUDiscovery", "Kind": "DWord", "OnValue": 1 },
+      { "ValueName": "EnablePMTUBHDetect", "Kind": "DWord", "OnValue": 0 },
+      { "ValueName": "GlobalMaxTcpWindowSize", "Kind": "DWord", "OnValue": 65535 },
+      { "ValueName": "MaxUserPort", "Kind": "DWord", "OnValue": 65534 },
+      { "ValueName": "TcpMaxDupAcks", "Kind": "DWord", "OnValue": 2 },
+      { "ValueName": "TcpNumConnections", "Kind": "DWord", "OnValue": 16777214 },
+      { "ValueName": "TcpTimedWaitDelay", "Kind": "DWord", "OnValue": 30 },
+      { "ValueName": "EnableTCPA", "Kind": "DWord", "OnValue": 0 }
+    ]
+  },
+  {
+    "Id": "net.per-interface",
+    "Category": "Network",
+    "Name": "Low latency ทุก network interface",
+    "Description": "เขียน TCPNoDelay, TcpAckFrequency, TcpDelAckTicks ลงทุก interface GUID ที่มีจริงบนเครื่องนี้",
+    "RegPath": "HKLM\\{NET_INTERFACES}",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Safe", "Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "TCPNoDelay", "Kind": "DWord", "OnValue": 1 },
+      { "ValueName": "TcpAckFrequency", "Kind": "DWord", "OnValue": 1 },
+      { "ValueName": "TcpDelAckTicks", "Kind": "DWord", "OnValue": 0 }
+    ]
+  },
+  {
+    "Id": "net.afd-buffers",
+    "Category": "Network",
+    "Name": "AFD socket buffers",
+    "Description": "ขยาย receive และ send window พร้อม fast copy threshold ของ Winsock kernel",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\AFD\\Parameters",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "DefaultReceiveWindow", "Kind": "DWord", "OnValue": 65536 },
+      { "ValueName": "DefaultSendWindow", "Kind": "DWord", "OnValue": 65536 },
+      { "ValueName": "FastCopyReceiveThreshold", "Kind": "DWord", "OnValue": 1024 },
+      { "ValueName": "FastSendDatagramThreshold", "Kind": "DWord", "OnValue": 1024 },
+      { "ValueName": "IrpStackSize", "Kind": "DWord", "OnValue": 32 },
+      { "ValueName": "LargeBufferSize", "Kind": "DWord", "OnValue": 16384 },
+      { "ValueName": "MediumBufferSize", "Kind": "DWord", "OnValue": 3008 },
+      { "ValueName": "SmallBufferSize", "Kind": "DWord", "OnValue": 256 }
+    ]
+  },
+  {
+    "Id": "net.psched-limit",
+    "Category": "Network",
+    "Name": "คืน bandwidth ที่ QoS จองไว้",
+    "Description": "NonBestEffortLimit=0 ปลด 20 เปอร์เซ็นต์ที่ Packet Scheduler กันไว้",
+    "RegPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Psched",
+    "Risk": "Safe",
+    "RequiresReboot": true,
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "NonBestEffortLimit", "Kind": "DWord", "OnValue": 0 }
+    ]
+  },
+  {
+    "Id": "net.msmq-nodelay",
+    "Category": "Network",
+    "Name": "MSMQ TCPNoDelay",
+    "Description": "ปิด Nagle ใน MSMQ stack",
+    "RegPath": "HKLM\\SOFTWARE\\Microsoft\\MSMQ\\Parameters",
+    "Risk": "Safe",
+    "Tiers": ["Extreme"],
+    "Values": [
+      { "ValueName": "TCPNoDelay", "Kind": "DWord", "OnValue": 1 }
+    ]
+  },
+  {
+    "Id": "net.w32time-interval",
+    "Category": "Network",
+    "Name": "W32Time sync ถี่ขึ้น",
+    "Description": "UpdateInterval=100 ให้นาฬิการะบบเที่ยงขึ้น มีผลกับเกมที่ตรวจ time drift",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\W32Time\\Config",
+    "Risk": "Moderate",
+    "Tiers": ["Extreme"],
+    "Values": [
+      { "ValueName": "UpdateInterval", "Kind": "DWord", "OnValue": 100, "DefaultValue": 360000 }
+    ]
+  },
+  {
+    "Id": "usb.idle-off",
+    "Category": "USB",
+    "Name": "ปิด USB selective suspend ทุกพอร์ต",
+    "Description": "IdleEnable=0 ในทุก Class\\USB\\NNNN ที่มีจริงบนเครื่องนี้ กันเมาส์และคีย์บอร์ดหลับ",
+    "RegPath": "HKLM\\{USB_CLASS_KEYS}",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "IdleEnable", "Kind": "DWord", "OnValue": 0, "DefaultValue": 1 }
+    ]
+  },
+  {
+    "Id": "usb.latency-flags",
+    "Category": "USB",
+    "Name": "USB D-state latency = 0",
+    "Description": "fid_D1/D2/D3Latency=0 ลดเวลาปลุกอุปกรณ์ USB จาก low power state",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\usbflags",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Extreme"],
+    "Values": [
+      { "ValueName": "fid_D1Latency", "Kind": "DWord", "OnValue": 0 },
+      { "ValueName": "fid_D2Latency", "Kind": "DWord", "OnValue": 0 },
+      { "ValueName": "fid_D3Latency", "Kind": "DWord", "OnValue": 0 }
+    ]
+  },
+  {
+    "Id": "usb.enhanced-power-off",
+    "Category": "USB",
+    "Name": "ปิด USB Enhanced Power Management",
+    "Description": "EnhancedPowerManagementEnabled=0 ที่ระดับ Enum\\USB",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Enum\\USB",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Extreme"],
+    "Values": [
+      { "ValueName": "EnhancedPowerManagementEnabled", "Kind": "DWord", "OnValue": 0, "DefaultValue": 1 }
+    ]
+  },
+  {
+    "Id": "telemetry.wer-off",
+    "Category": "Telemetry",
+    "Name": "ปิด Windows Error Reporting",
+    "Description": "ไม่ให้ WER เก็บ dump และส่งข้อมูลตอนโปรแกรมแครช",
+    "RegPath": "HKLM\\SOFTWARE\\Microsoft\\Windows\\Windows Error Reporting",
+    "Risk": "Safe",
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "Disabled", "Kind": "DWord", "OnValue": 1, "DefaultValue": 0 }
+    ]
+  },
+  {
+    "Id": "telemetry.wer-policy-off",
+    "Category": "Telemetry",
+    "Name": "ปิด WER ระดับ policy",
+    "Description": "บังคับปิดทั้งเครื่องผ่าน policy key",
+    "RegPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting",
+    "Risk": "Safe",
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "Disabled", "Kind": "DWord", "OnValue": 1 }
+    ]
+  },
+  {
+    "Id": "telemetry.background-apps-off",
+    "Category": "Telemetry",
+    "Name": "ปิด background apps ของ Store",
+    "Description": "GlobalUserDisabled=1 ไม่ให้แอป Store รันเบื้องหลัง",
+    "RegPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications",
+    "Risk": "Safe",
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "GlobalUserDisabled", "Kind": "DWord", "OnValue": 1, "DefaultValue": 0 }
+    ]
+  },
+  {
+    "Id": "system.wsh-timeout-user",
+    "Category": "System",
+    "Name": "Windows Script Host timeout 1 วินาที (user)",
+    "Description": "MaxWaitForScript=1 ไม่ให้ logon script ค้างนาน",
+    "RegPath": "HKCU\\Software\\Microsoft\\Windows Script Host\\Settings",
+    "Risk": "Moderate",
+    "Tiers": ["Extreme"],
+    "Values": [
+      { "ValueName": "MaxWaitForScript", "Kind": "DWord", "OnValue": 1 }
+    ]
+  },
+  {
+    "Id": "system.wsh-timeout-machine",
+    "Category": "System",
+    "Name": "Windows Script Host timeout 1 วินาที (machine)",
+    "Description": "เหมือนด้านบนแต่ระดับเครื่อง",
+    "RegPath": "HKLM\\SOFTWARE\\Microsoft\\Windows Script Host\\Settings",
+    "Risk": "Moderate",
+    "Tiers": ["Extreme"],
+    "Values": [
+      { "ValueName": "MaxWaitForScript", "Kind": "DWord", "OnValue": 1 }
+    ]
+  },
+  {
+    "Id": "gpo.delivery-optimization-off",
+    "Category": "Group Policy",
+    "Name": "Delivery Optimization = HTTP only",
+    "Description": "DODownloadMode=0 กัน Windows Update และ Store แชร์ไฟล์แบบ P2P ให้เครื่องอื่นในแลน คืน bandwidth และลด CPU/disk ตอนเล่นเกม",
+    "RegPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization",
+    "Risk": "Safe",
+    "Tiers": ["Safe", "Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "DODownloadMode", "Kind": "DWord", "OnValue": 0, "DefaultValue": 1 }
+    ]
+  },
+  {
+    "Id": "gpo.telemetry-min",
+    "Category": "Group Policy",
+    "Name": "Allow Telemetry = 0 (Security)",
+    "Description": "ปิด telemetry ระดับต่ำสุดที่ policy อนุญาต Enterprise/LTSC = 0 (ปิดสนิท), รุ่นอื่น = 1 อัตโนมัติ ลด background process ของ DiagTrack",
+    "RegPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection",
+    "Risk": "Safe",
+    "Tiers": ["Safe", "Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "AllowTelemetry", "Kind": "DWord", "OnValue": 0, "DefaultValue": 3 }
+    ]
+  },
+  {
+    "Id": "gpo.wu-no-auto-download",
+    "Category": "Group Policy",
+    "Name": "Windows Update ไม่ auto download",
+    "Description": "AUOptions=2 ให้แจ้งเตือนก่อนดาวน์โหลดเท่านั้น กันเน็ตถูกซัดกลางเกม",
+    "RegPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+    "Risk": "Moderate",
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "AUOptions", "Kind": "DWord", "OnValue": 2, "DefaultValue": 4 },
+      { "ValueName": "NoAutoUpdate", "Kind": "DWord", "OnValue": 0 }
+    ]
+  },
+  {
+    "Id": "gpo.wu-no-auto-reboot",
+    "Category": "Group Policy",
+    "Name": "ห้ามรีบูตอัตโนมัติเมื่อ user ล็อกอินอยู่",
+    "Description": "NoAutoRebootWithLoggedOnUsers=1 กัน Windows รีบูตกลางเกมหลังติดตั้ง update",
+    "RegPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+    "Risk": "Safe",
+    "Tiers": ["Safe", "Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "NoAutoRebootWithLoggedOnUsers", "Kind": "DWord", "OnValue": 1, "DefaultValue": 0 }
+    ]
+  },
+  {
+    "Id": "gpo.cortana-off",
+    "Category": "Group Policy",
+    "Name": "ปิด Cortana",
+    "Description": "AllowCortana=0 หยุด service ค้นหาด้วยเสียงและ background indexing ของ Cortana",
+    "RegPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search",
+    "Risk": "Safe",
+    "Tiers": ["Safe", "Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "AllowCortana", "Kind": "DWord", "OnValue": 0, "DefaultValue": 1 },
+      { "ValueName": "AllowSearchToUseLocation", "Kind": "DWord", "OnValue": 0 },
+      { "ValueName": "ConnectedSearchUseWeb", "Kind": "DWord", "OnValue": 0 }
+    ]
+  },
+  {
+    "Id": "gpo.consumer-features-off",
+    "Category": "Group Policy",
+    "Name": "ปิด Consumer Features (แนะนำแอป, tips)",
+    "Description": "หยุด Windows push แอปแนะนำ, tips และ soft-landing ads บน Start กัน CPU spike ตอน shell ประมวลผลข้อมูล",
+    "RegPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\CloudContent",
+    "Risk": "Safe",
+    "Tiers": ["Safe", "Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "DisableWindowsConsumerFeatures", "Kind": "DWord", "OnValue": 1 },
+      { "ValueName": "DisableSoftLanding", "Kind": "DWord", "OnValue": 1 },
+      { "ValueName": "DisableTailoredExperiencesWithDiagnosticData", "Kind": "DWord", "OnValue": 1 }
+    ]
+  },
+  {
+    "Id": "gpo.ntfs-shortname-off",
+    "Category": "Group Policy",
+    "Name": "NTFS ไม่สร้าง short name (8.3)",
+    "Description": "NtfsDisable8dot3NameCreation=1 ลด overhead ตอน NTFS สร้างชื่อไฟล์เก่าคู่ทุกไฟล์ใหม่ ช่วย disk I/O",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+    "Risk": "Moderate",
+    "RequiresReboot": true,
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "NtfsDisable8dot3NameCreation", "Kind": "DWord", "OnValue": 1, "DefaultValue": 2 }
+    ]
+  },
+  {
+    "Id": "gpo.long-paths",
+    "Category": "Group Policy",
+    "Name": "รองรับ path ยาวกว่า 260 ตัวอักษร",
+    "Description": "LongPathsEnabled=1 กันเกมที่ install ไว้ลึกมากๆ (โมด ฯลฯ) อ่านไฟล์พลาด",
+    "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+    "Risk": "Safe",
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "LongPathsEnabled", "Kind": "DWord", "OnValue": 1, "DefaultValue": 0 }
+    ]
+  },
+  {
+    "Id": "gpo.notification-off",
+    "Category": "Group Policy",
+    "Name": "ปิด toast notification ทั้งเครื่อง",
+    "Description": "NoToastApplicationNotification=1 กัน popup แจ้งเตือน (Discord, Mail, Update) แสดงระหว่างเกม fullscreen",
+    "RegPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications",
+    "Risk": "Moderate",
+    "Tiers": ["Extreme"],
+    "Values": [
+      { "ValueName": "NoToastApplicationNotification", "Kind": "DWord", "OnValue": 1, "DefaultValue": 0 }
+    ]
+  },
+  {
+    "Id": "gpo.storesync-off",
+    "Category": "Group Policy",
+    "Name": "ปิด Store auto-update apps",
+    "Description": "AutoDownload=2 หยุด Microsoft Store โหลดอัปเดตแอปกลางคัน คืน bandwidth และ disk I/O",
+    "RegPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsStore",
+    "Risk": "Safe",
+    "Tiers": ["Balanced", "Extreme"],
+    "Values": [
+      { "ValueName": "AutoDownload", "Kind": "DWord", "OnValue": 2, "DefaultValue": 4 }
+    ]
+  },
+  {
+    "Id": "gpo.onedrive-off",
+    "Category": "Group Policy",
+    "Name": "ปิด OneDrive",
+    "Description": "DisableFileSyncNGSC=1 หยุด OneDrive.exe และการ sync ไฟล์เบื้องหลัง กิน CPU/disk/เน็ตชัดเจนตอน sync ไฟล์ใหญ่",
+    "RegPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\OneDrive",
+    "Risk": "Moderate",
+    "Tiers": ["Extreme"],
+    "Values": [
+      { "ValueName": "DisableFileSyncNGSC", "Kind": "DWord", "OnValue": 1, "DefaultValue": 0 }
+    ]
+  }
+]

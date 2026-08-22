@@ -1,0 +1,72 @@
+<Page x:Class="BoostFPS.Views.NvidiaPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource Bg}" Title="NVIDIA">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="28,24,28,24">
+
+            <TextBlock Text="NVIDIA profile (.nip)" Style="{StaticResource H1}" />
+            <TextBlock Style="{StaticResource Subtle}"
+                       Text="import ค่าโปรไฟล์ไดรเวอร์จากไฟล์ .nip โดยจะ export โปรไฟล์เดิมทั้งหมดเก็บไว้ก่อนทุกครั้ง" />
+
+            <Border Style="{StaticResource Card}" Margin="0,16,0,10">
+                <StackPanel>
+                    <TextBlock x:Name="GpuText" FontSize="14" FontWeight="SemiBold" />
+                    <TextBlock x:Name="InspectorText" Style="{StaticResource Subtle}" Margin="0,6,0,0" TextWrapping="Wrap" />
+                    <WrapPanel Margin="0,12,0,0">
+                        <Button Content="เลือก nvidiaProfileInspector.exe" Click="PickInspector_Click" Margin="0,0,8,0" />
+                        <Button Content="Export โปรไฟล์ปัจจุบัน" Click="Export_Click" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="ไฟล์ที่จะ import" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{StaticResource Info}" Margin="0,0,0,10" />
+                    <TextBlock x:Name="NipPathText" Style="{StaticResource Subtle}" TextWrapping="Wrap" />
+                    <WrapPanel Margin="0,12,0,0">
+                        <Button Content="ใช้ preset FiveM_Clean.nip" Click="UsePreset_Click" Margin="0,0,8,0" />
+                        <Button Content="เลือกไฟล์ .nip อื่น" Click="PickNip_Click" Margin="0,0,8,0" />
+                        <Button x:Name="ImportButton" Style="{StaticResource PrimaryButton}"
+                                Content="Import ลงไดรเวอร์" Click="Import_Click" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="เนื้อหาในไฟล์" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{StaticResource Info}" Margin="0,0,0,10" />
+                    <ItemsControl x:Name="ProfileList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0,0,0,14">
+                                    <TextBlock Text="{Binding ProfileName}" FontWeight="SemiBold" />
+                                    <TextBlock Style="{StaticResource Subtle}" Margin="0,4,0,0"
+                                               Text="{Binding ExecutableList}" TextWrapping="Wrap" />
+                                    <ItemsControl ItemsSource="{Binding Settings}" Margin="0,8,0,0">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="0,0,0,3">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="260" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="{Binding SettingNameInfo}" Style="{StaticResource Subtle}" />
+                                                    <TextBlock Grid.Column="1" Text="{Binding SettingValue}" FontSize="12" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

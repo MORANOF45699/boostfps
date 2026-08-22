@@ -1,0 +1,69 @@
+<Page x:Class="BoostFPS.Views.NetworkPowerPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource Bg}" Title="Network / Power">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="28,24,28,24">
+
+            <TextBlock Text="Network / Power" Style="{StaticResource H1}" />
+            <TextBlock Style="{StaticResource Subtle}"
+                       Text="ส่วนที่ไม่ใช่ registry ล้วน ๆ: NIC power saving, netsh, power plan และ bcdedit" />
+
+            <Border Style="{StaticResource Card}" Margin="0,16,0,10">
+                <StackPanel>
+                    <TextBlock Text="NIC" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{StaticResource Info}" Margin="0,0,0,8" />
+                    <TextBlock Style="{StaticResource Subtle}" TextWrapping="Wrap"
+                               Text="ปิด Energy Efficient Ethernet, Green Ethernet, Selective Suspend และ power management ของการ์ดที่เชื่อมต่ออยู่ แล้วรีสตาร์ตการ์ด (เน็ตจะหลุดสั้น ๆ) — ไม่แตะ Interrupt Moderation, RSC, Flow Control เพราะเคยทำให้ desync บน Realtek 2.5G" />
+                    <WrapPanel Margin="0,12,0,0">
+                        <Button Content="ปิด NIC power saving" Click="NicPower_Click" Margin="0,0,8,0" />
+                        <Button Content="netsh TCP globals" Click="TcpGlobals_Click" Margin="0,0,8,0" />
+                        <Button Content="ดูค่า netsh ปัจจุบัน" Click="ShowTcp_Click" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="Power plan" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{StaticResource Info}" Margin="0,0,0,8" />
+                    <TextBlock x:Name="ActivePlanText" Style="{StaticResource Subtle}" />
+                    <TextBlock x:Name="LaptopWarning" Style="{StaticResource Subtle}"
+                               Foreground="{StaticResource Warn}" Margin="0,6,0,0" TextWrapping="Wrap" />
+                    <WrapPanel Margin="0,12,0,0">
+                        <Button Content="High performance" Click="HighPerf_Click" Margin="0,0,8,8" />
+                        <Button x:Name="UltimateButton" Content="Ultimate performance" Click="Ultimate_Click" Margin="0,0,8,8" />
+                        <Button Content="Balanced (คืนค่า)" Click="BalancedPlan_Click" Margin="0,0,8,8" />
+                        <Button Content="Import .pow" Click="ImportPow_Click" Margin="0,0,8,8" />
+                        <Button Content="Export plan ปัจจุบัน" Click="ExportPow_Click" Margin="0,0,8,8" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="Boot timer" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{StaticResource Info}" Margin="0,0,0,8" />
+                    <TextBlock x:Name="DynamicTickText" Style="{StaticResource Subtle}" TextWrapping="Wrap" />
+                    <WrapPanel Margin="0,12,0,0">
+                        <Button Content="ปิด dynamic tick" Click="DisableTick_Click" Margin="0,0,8,0" />
+                        <Button Content="คืนค่า dynamic tick" Click="EnableTick_Click" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="ผลลัพธ์ล่าสุด" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{StaticResource Info}" Margin="0,0,0,8" />
+                    <TextBox x:Name="OutputBox" IsReadOnly="True" TextWrapping="NoWrap"
+                             Background="{StaticResource Bg}" Foreground="{StaticResource Text}"
+                             BorderBrush="{StaticResource Border}" FontFamily="Consolas" FontSize="12"
+                             Height="200" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" />
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>

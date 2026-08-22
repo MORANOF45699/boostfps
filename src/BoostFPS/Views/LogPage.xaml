@@ -1,0 +1,26 @@
+<Page x:Class="BoostFPS.Views.LogPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource Bg}" Title="Log">
+
+    <DockPanel Margin="28,24,28,20">
+        <StackPanel DockPanel.Dock="Top" Margin="0,0,0,14">
+            <TextBlock Text="Log" Style="{StaticResource H1}" />
+            <TextBlock Style="{StaticResource Subtle}"
+                       Text="บันทึกทุกการ apply และ revert ของโปรแกรมนี้" />
+            <Button Content="รีเฟรช" Click="Refresh_Click" HorizontalAlignment="Left" Margin="0,12,0,0" />
+        </StackPanel>
+
+        <DataGrid x:Name="LogGrid" AutoGenerateColumns="False" IsReadOnly="True"
+                  Background="{StaticResource BgCard}" Foreground="{StaticResource Text}"
+                  RowBackground="{StaticResource BgCard}" AlternatingRowBackground="{StaticResource BgElevated}"
+                  BorderBrush="{StaticResource Border}" GridLinesVisibility="Horizontal"
+                  HorizontalGridLinesBrush="{StaticResource Border}" HeadersVisibility="Column">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="เวลา" Binding="{Binding Timestamp, StringFormat='yyyy-MM-dd HH:mm:ss'}" Width="170" />
+                <DataGridTextColumn Header="Action" Binding="{Binding Action}" Width="140" />
+                <DataGridTextColumn Header="รายละเอียด" Binding="{Binding Description}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</Page>

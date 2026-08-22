@@ -1,0 +1,69 @@
+<Page x:Class="BoostFPS.Views.DashboardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="{StaticResource Bg}" Title="Dashboard">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="28,24,28,24">
+
+            <TextBlock Text="Dashboard" Style="{StaticResource H1}" />
+            <TextBlock Style="{StaticResource Subtle}"
+                       Text="สรุปเครื่องนี้และสถานะ tweak ทั้งหมด ไม่มีอะไรถูกเขียนจนกว่าจะกด Apply ในหน้าอื่น" />
+
+            <Border Style="{StaticResource Card}" Margin="0,16,0,10"
+                    BorderBrush="{StaticResource Accent}" BorderThickness="1">
+                <StackPanel>
+                    <TextBlock Text="Auto-Tune ปุ่มเดียว" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{StaticResource Accent}" Margin="0,0,0,8" />
+                    <TextBlock x:Name="AutoTuneRecommendation" Style="{StaticResource Subtle}"
+                               TextWrapping="Wrap" LineHeight="20" />
+                    <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+                        <Button x:Name="AutoTuneButton" Style="{StaticResource PrimaryButton}"
+                                Content="ปรับแต่งอัตโนมัติเลย" Click="AutoTune_Click" />
+                        <Button Content="Revert (หน้า Backup)" Click="OpenBackup_Click" Margin="10,0,0,0" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}" Margin="0,16,0,10">
+                <StackPanel>
+                    <TextBlock Text="เครื่องนี้" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{StaticResource Info}" Margin="0,0,0,10" />
+                    <ItemsControl x:Name="MachineFacts">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,0,0,6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="170" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="{Binding Key}" Style="{StaticResource Subtle}" />
+                                    <TextBlock Grid.Column="1" Text="{Binding Value}" TextWrapping="Wrap" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="สถานะ" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{StaticResource Info}" Margin="0,0,0,10" />
+                    <TextBlock x:Name="StatusText" Style="{StaticResource Subtle}" LineHeight="22" />
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="System Protection" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{StaticResource Info}" Margin="0,0,0,10" />
+                    <TextBlock x:Name="ProtectionText" Style="{StaticResource Subtle}" TextWrapping="Wrap" />
+                    <Button x:Name="EnableProtectionButton" Content="เปิด System Protection ให้ไดรฟ์ระบบ"
+                            Click="EnableProtection_Click" HorizontalAlignment="Left" Margin="0,12,0,0" />
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
+    </ScrollViewer>
+</Page>
