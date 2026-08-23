@@ -51,6 +51,11 @@ public partial class BaselinePage : Page
 
     private void ApplyFilter()
     {
+        // XAML fires Checked while the tree is still being built (CheckBox declared before
+        // DiffGrid, IsChecked="True" evaluates during InitializeComponent). Skip until the
+        // grid exists; the constructor's own Reload() will populate it in order.
+        if (DiffGrid is null) return;
+
         var rows = DiffOnly.IsChecked == true
             ? _all.Where(r => r.DiffersFromDefault)
             : _all;
