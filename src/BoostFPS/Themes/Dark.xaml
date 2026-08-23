@@ -266,6 +266,60 @@
         <Setter Property="PanningMode" Value="VerticalOnly" />
     </Style>
 
+    <!-- DataGrid dark theme. Default WPF headers, cells and edit backgrounds all render
+         system-white; override each surface so the whole grid stays on the dark palette. -->
+    <Style TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="{StaticResource BgElevated}" />
+        <Setter Property="Foreground" Value="{StaticResource Text}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderThickness" Value="0,0,1,1" />
+        <Setter Property="Padding" Value="10,8" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+    </Style>
+
+    <Style TargetType="DataGridCell">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource Text}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="8,6" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridCell">
+                    <Border Background="{TemplateBinding Background}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="{StaticResource BgHover}" />
+                <Setter Property="Foreground" Value="{StaticResource Accent}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="DataGridRow">
+        <Setter Property="Background" Value="{StaticResource BgCard}" />
+        <Setter Property="Foreground" Value="{StaticResource Text}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
+    </Style>
+
+    <Style TargetType="DataGrid">
+        <Setter Property="Background" Value="{StaticResource BgCard}" />
+        <Setter Property="Foreground" Value="{StaticResource Text}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="RowBackground" Value="{StaticResource BgCard}" />
+        <Setter Property="AlternatingRowBackground" Value="{StaticResource BgElevated}" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource Border}" />
+        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource Border}" />
+        <Setter Property="RowHeaderWidth" Value="0" />
+        <Setter Property="HeadersVisibility" Value="Column" />
+    </Style>
+
     <Style TargetType="Expander">
         <Setter Property="Foreground" Value="{StaticResource Text}" />
         <Setter Property="FontFamily" Value="{StaticResource UiFont}" />
