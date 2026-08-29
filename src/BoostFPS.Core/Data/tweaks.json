@@ -62,27 +62,27 @@
   {
     "Id": "input.mouse-queue-size",
     "Category": "Input",
-    "Name": "Mouse data queue size = 20",
-    "Description": "ลด MouseDataQueueSize จาก 100 เหลือ 20 ลด buffer ของ mouclass ทำให้ input ถึงเกมเร็วขึ้น",
+    "Name": "Mouse data queue size = 16 (Savenz)",
+    "Description": "ลด MouseDataQueueSize จาก 100 เหลือ 16 (0x10) ลด buffer ของ mouclass ทำให้ input ถึงเกมเร็วขึ้น — ตามค่าที่ Savenz preset ใช้",
     "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\mouclass\\Parameters",
     "Risk": "Moderate",
     "RequiresReboot": true,
     "Tiers": ["Balanced", "Extreme"],
     "Values": [
-      { "ValueName": "MouseDataQueueSize", "Kind": "DWord", "OnValue": 20, "DefaultValue": 100 }
+      { "ValueName": "MouseDataQueueSize", "Kind": "DWord", "OnValue": 16, "DefaultValue": 100 }
     ]
   },
   {
     "Id": "input.keyboard-queue-size",
     "Category": "Input",
-    "Name": "Keyboard data queue size = 20",
-    "Description": "ลด KeyboardDataQueueSize จาก 100 เหลือ 20 ลด buffer ของ kbdclass",
+    "Name": "Keyboard data queue size = 10 (Savenz)",
+    "Description": "ลด KeyboardDataQueueSize จาก 100 เหลือ 10 (0x0a) ลด buffer ของ kbdclass — ตามค่าที่ Savenz preset ใช้",
     "RegPath": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\kbdclass\\Parameters",
     "Risk": "Moderate",
     "RequiresReboot": true,
     "Tiers": ["Balanced", "Extreme"],
     "Values": [
-      { "ValueName": "KeyboardDataQueueSize", "Kind": "DWord", "OnValue": 20, "DefaultValue": 100 }
+      { "ValueName": "KeyboardDataQueueSize", "Kind": "DWord", "OnValue": 10, "DefaultValue": 100 }
     ]
   },
   {
